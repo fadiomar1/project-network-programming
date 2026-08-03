@@ -1,0 +1,61 @@
+ssh fadi@10.10.10.10
+docker ps
+cd ~/router-lab
+ls -lah
+cat router.clab.yml
+containerlab inspect -t router.clab.yml 
+cd ~/apprise-app
+ls -lah
+cat docker-compose.yml
+docker compose ps
+curl http://127.0.0.1:8000/status
+curl -I http://127.0.0.1:8000
+cd ~/wordpress-project
+ls -lah
+cat docker-compose.yml
+docker compose ps
+curl -I http://127.0.0.1:8080
+cd ~/wordpress-project/wordpress/wp-content/plugins/apprise-integration
+ls -lah
+cat apprise-integration.php
+docker exec wordpress php -l \
+/var/www/html/wp-content/plugins/apprise-integration/apprise-integration.php
+docker exec wordpress php -r '
+$response = file_get_contents("http://host.docker.internal:8000/status");
+echo "Apprise response: " . $response . PHP_EOL;
+'
+zrok status
+zrok version
+curl -I https://61fqiseie10v.shares.zrok.io
+https://61fqiseie10v.shares.zrok.io/wp-login.php?redirect_to=https%3A%2F%2F61fqiseie10v.shares.zrok.io%2Fwp-admin%2F&reauth=1
+{
+clear
+echo "===== FINAL PROJECT STATUS ====="
+
+echo
+echo "----- Docker Containers -----"
+docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+
+echo
+echo "----- Containerlab -----"
+containerlab inspect -t ~/router-lab/router.clab.yml
+
+echo
+echo "----- Apprise -----"
+curl -s http://127.0.0.1:8000/status
+echo
+
+echo
+echo "----- WordPress -----"
+curl -s -o /dev/null -w "WordPress HTTP Status: %{http_code}\n" \
+http://127.0.0.1:8080
+
+echo
+echo "----- zrok Public URL -----"
+curl -s -o /dev/null -w "zrok HTTP Status: %{http_code}\n" \
+https://61fqiseie10v.shares.zrok.io}
+http://192.168.1.200:8000<------- رابط فتح الموقع الخاص بي APPRISE
+http://192.168.1.200:8080/wp-admin<----- رابط فتح الورد بريس
+https://192.168.1.200:8006/#v1:0:=qemu%2F100:4:::::8::<---- رابط فتح وتشغيل البروكس مكس كفيرتشول مشين 
+zrok share public http://127.0.0.1:8080 -n public:fadi-apprise<----- الامر لتشغيل  zrok ليصبح الرابط الخاص بمشروعي عام 
+https://fadi-apprise.shares.zrok.io/wp-admin  <--- رابط الخاص لفتح الموقع الورد برس انتجريشن (الرابط العام الخاص بمشروعي)
